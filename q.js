@@ -28,17 +28,13 @@ $(document).ready(function() {
 		// LOAD DATA
 		$("#p10").load("https://no.arturkraak.duckdns.org/");
 
-		// MOVE DATA
+		// UPDATE TABLE HEADERS AND DRAW GRAPH
 		for (i = 0; i < 10; i++) {
 			document.getElementById("p" + (i).toString()).innerHTML = document.getElementById("p" + (i + 1).toString()).innerHTML;
-		}
-
-		// TITLE
-		document.title = document.getElementById("p9").innerHTML;
-
-		// DRAW
-		for (i = 0; i < 10; i++) {
 			ctx.fillRect((width / 10 * i), (height - document.getElementById("p" + i.toString()).innerHTML * zoom), (width / 10), document.getElementById("p" + i.toString()).innerHTML * zoom);
 		}
+
+		// UPDATE TITLE
+		document.title = document.getElementById("p9").innerHTML;
 	}, 1000);
 });
