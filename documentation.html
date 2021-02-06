@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+<style>
+.stackedit__html{
+margin-bottom: 50px;
+}
+</style>
+</head>
+
+<body class="stackedit">
+<div class="stackedit__html"><h1 id="raspberry-pi-cpu-temperature-monitor">Raspberry pi CPU temperature monitor</h1>
+<p>Description: Full-stack application which monitors the CPU temperature of a Raspberry pi.</p>
+<h2 id="step-1-bash">Step 1: Bash shell script</h2>
+<p>The bash script continously measures the temperature of the Raspberry pi’s CPU using:</p>
+<pre><code>/opt/vc/bin/vcgencmd measure_temp
+output: temp=36.5'C
+</code></pre>
+<p>It also trims the output using the sed command, leaving only the float value.</p>
+<pre><code>$(/opt/vc/bin/vcgencmd measure_temp | sed "s/\&lt;temp=//g" | sed "s/..$//")
+output: 36.5
+</code></pre>
+<p>Then the bash script stores and updates the key in redis every second using redis-cli.</p>
+<h2 id="step-2-redis">Step 2: Redis</h2>
+<p>Redis holds the temperature value in memory where it can be efficiently fetched.</p>
+<h2 id="step-3-node.js">Step 3: Node.js</h2>
+<p>Node.js app retrives the key from redis and broadcasts it using an http server on a different port than the main Nginx server.</p>
+<h2 id="step-4-nginx">Step 4: NGiNX</h2>
+<li>hosts the index.html and q.js files under the domain: <a href="https://arturkraak.duckdns.org">https://arturkraak.duckdns.org</a></li>
+<li>makes the Node.js app accessible through a proxy at: <a href="https://no.arturkraak.duckdns.org">https://no.arturkraak.duckdns.org</a>.</li>
+<h2 id="step-5-jquery">Step 5: jQuery</h2>
+<p>jQuery creates the table headers then loads the value into a hidden table header each second.</p>
+<h2 id="step-6-html-css-js">Step 6: HTML CSS JS</h2>
+<p>JavaScript updates the table headers and the title then draws a graph onto the HMTL Canvas where it is displayed to the client(Browser).
+</p>
+</div>
+<footer style="background-color: green; color: white; margin: 0px" >
+<h3 style="text-align: center; margin: 0px; font-family: 'Open Sans', sans-serif;">Artur Kraak<br>2021</h3>
+</footer>
+</body>
+
+</html>
