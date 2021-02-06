@@ -5,9 +5,9 @@ The bash script continuosly measures the temperature of the Raspberry pi's CPU u
 
 	/opt/vc/bin/vcgencmd measure_temp
 	output: temp=36.5'C
-It also trims the output using the sed command, leaving only the float value.
+It also trims the output using egrep, leaving only the float value.
 	
-	$(/opt/vc/bin/vcgencmd measure_temp | sed "s/\<temp=//g" | sed "s/..$//")
+	$(/opt/vc/bin/vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*')
 	output: 36.5
 Then stores and updates the key in redis using redis-cli every second.
 ## Step 2: Redis
