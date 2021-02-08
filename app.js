@@ -1,6 +1,6 @@
 const http = require('http')
-const port = 3000
-
+const port = 3001
+var temp_arr
 const redis = require('redis')
 const client = redis.createClient({
     host: '127.0.0.1',
@@ -12,17 +12,17 @@ client.on('error', err => {
 })
 
 const server = http.createServer(function(req, res) {
-	client.get('cpu', (err, reply) => {
+        client.lrange('my_list', 0, -1, (err, reply) => {
         if (err) throw err
-        res.write(reply)
-    	res.end()
-	})
+        temp_arr = reply.toString().split(",")
+        res.end(temp_arr.toString())
+        })
 })
 
 server.listen(port, function(error){
-	if(error) {
-		console.log("err: ", error)
-	} else {
-		console.log("Server is listening on port "+ port)
-	}
+        if(error) {
+                console.log("err: ", error)
+        } else {
+                console.log("Server is listening on port "+ port)
+        }
 })
