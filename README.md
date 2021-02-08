@@ -16,7 +16,7 @@ Redis holds the temperature value in the memory where it can be efficiently fetc
 Node.js app retrieves the key from redis and broadcasts it using an http server on a different port than the main Nginx server.
 ## Step 4: NGiNX
 -   hosts the index.html and q.js files under the domain:  [https://arturkraak.duckdns.org](https://arturkraak.duckdns.org/)
--   makes the Node.js app accessible through a proxy at:  [https://no.arturkraak.duckdns.org](https://no.arturkraak.duckdns.org/).
+-   makes the Node.js app accessible through a proxy at:  [https://test.arturkraak.duckdns.org](https://test.arturkraak.duckdns.org/).
 ## Step 5: HTML/CSS/JS/jQuery 
 jQuery creates the table headers then loads the value into a hidden table header each second.
 
