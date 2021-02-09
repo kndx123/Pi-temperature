@@ -1,4 +1,4 @@
-# Raspberry pi CPU temperature monitor
+# pipucs (Pi) C(PU) (C)elsiu(s)
 Description: Full-stack application which monitors the CPU temperature of a Raspberry pi.
 ## Step 1: Bash shell script
 The bash script continuosly measures the temperature of the Raspberry pi's CPU using:
