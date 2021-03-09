@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const http = require('http')
 const port = 3001
 var temp_arr
@@ -10,6 +12,22 @@ const client = redis.createClient({
 client.on('error', err => {
     console.log('Error ' + err)
 })
+
+const { exec } = require('child_process');
+
+exec('./temp.sh', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`error: ${error.message}`);
+    return;
+  }
+
+  if (stderr) {
+    console.error(`stderr: ${stderr}`);
+    return;
+  }
+
+  console.log(`stdout:\n${stdout}`);
+});
 
 const server = http.createServer(function(req, res) {
         client.lrange('my_list', 0, -1, (err, reply) => {
